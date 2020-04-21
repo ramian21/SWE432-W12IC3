@@ -19,7 +19,31 @@ public class attributeServlet extends HttpServlet {
       String name = request.getParameter("attrib_name");
       String value = request.getParameter("attrib_value");
       String remove = request.getParameter("attrib_remove");
+      String invalidate = request.getParameter("invalidate");
+      if (invalidate != null && invalidate.equals("invalidate")) {
+         session.invalidate();
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
 
+         out.println("<html>");
+         out.println("<head>");
+         out.println(" <title>Session lifecycle</title>");
+         out.println("</head>");
+         out.println("");
+         out.println("<body>");
+
+         out.println("<p>Your session has been invalidated.</P>");
+
+         // Create a link so the user can create a new session.
+         // The link will have a parameter builtin
+         String lifeCycleURL = "attributeServlet";
+         out.println("<a href=\"" + lifeCycleURL + "?action=newSession\">");
+         out.println("Create new session</A>");
+
+         out.println("</body>");
+         out.println("</html>");
+         out.close();
+      }
       if (remove != null && remove.equals("on")) {
          session.removeAttribute(name);
       } else {
@@ -56,6 +80,8 @@ public class attributeServlet extends HttpServlet {
 
       out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
       out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
+      out.println(
+            " <button type=\"button\" onclick=\"location.href='attributeServlet?invalidate=invalidate'\">");
       out.println("</form>");
       out.println("<hr>");
 

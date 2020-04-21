@@ -36,7 +36,7 @@ public class attributeServlet extends HttpServlet {
 
          // Create a link so the user can create a new session.
          // The link will have a parameter builtin
-         String lifeCycleURL = "attributeServlet";
+         String lifeCycleURL = "/attributeServlet";
          out.println("<a href=\"" + lifeCycleURL + "?action=newSession\">");
          out.println("Create new session</A>");
 
@@ -80,8 +80,8 @@ public class attributeServlet extends HttpServlet {
 
       out.println(" <br><input type=\"checkbox\" name=\"attrib_remove\">Remove");
       out.println(" <input type=\"submit\" name=\"update\" value=\"Update\">");
-      out.println(
-            " <button type=\"button\" onclick=\"location.href='attributeServlet?invalidate=invalidate'\">");
+      out.println(" <button type=\"button\" onclick=\"location.href='/attributeServlet?invalidate=invalidate'\">");
+      out.println(" Invalidate Session </button>");
       out.println("</form>");
       out.println("<hr>");
 
